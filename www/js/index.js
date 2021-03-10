@@ -3,9 +3,9 @@ document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
     document.getElementById("getPosition").addEventListener("click", getPosition);
-    document.getElementById("guardar").addEventListener("click", mark);
     
-}
+    
+
 function getPosition() {
     var options = {
         enableHighAccuracy: true,
@@ -30,28 +30,10 @@ function getPosition() {
     }
 }
 
-mark =[]
-function recorre(x) {
-    for(i=0;i<x.length;i++){
-    var latlng = x[i]
-    //A marker identifies a location on a map.    
-    var marker = new google.maps.Marker({  
-    position: latlng,  
-    map: map  
-    }); 
-    }    
-}
-
-function mark(){
-    lat=document.getElementById('lat').value;
-    lang=document.getElementById('long').value;
-    var latlng = new google.maps.LatLng(lat, lang)
-    mark.push(latlng)
-    recorre(mark)
-}
 
  // Find current position of divice with GPS(latitude,longitude)    
 navigator.geolocation.getCurrentPosition(onSuccess, onError);  
+}
 load = false;
 function onSuccess(position){  
     var element = document.getElementById('geolocation');  
@@ -87,3 +69,25 @@ var watchID = navigator.geolocation.watchPosition(onSuccess, onError,{
 });  
  //Simply passes the indicated event to the browser, which handles it according to the browser's DOM event model.    
 google.maps.event.addDomListener(window, 'load', onSuccess);  
+
+
+marka =[];
+
+function recorre(x) {
+    for(i=0;i<x.length;i++){
+    var latlng = x[i]
+    //A marker identifies a location on a map.    
+    var marker = new google.maps.Marker({  
+    position: latlng,  
+    map: map  
+    }); 
+    }    
+}
+
+function mark(){
+    lat=$('#lat').val();
+    lang=$('#long').val();
+    var latlng = new google.maps.LatLng(lat, lang)
+    marka.push(latlng)
+    recorre(marka)
+}
